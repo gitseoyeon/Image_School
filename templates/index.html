@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YOLOv4 Image Analysis</title>
+</head>
+<body>
+    <h1>YOLOv4 Image Analysis</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload and Analyze</button>
+    </form>
+    {% if image_path %}
+        <img src="{{ url_for('static', filename=image_path) }}" alt="Uploaded Image">
+        <h2>분석 결과:</h2>
+        <ul>
+            {% for result in results %}
+                <li>{{ result.label }} (신뢰도: {{ result.confidence }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
